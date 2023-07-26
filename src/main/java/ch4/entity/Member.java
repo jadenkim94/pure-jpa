@@ -1,60 +1,38 @@
 package ch4.entity;
 
-import ch4.entity.type.RoleType;
-
-import javax.persistence.*;
-import java.util.Date;
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.Id;
 
 @Entity
-@Table(name = "member")
 public class Member {
 
-    @Id
-    @Column(name = "ID")
-    private String id;
+    @Id @GeneratedValue
+    @Column(name = "MEMBER_ID")
+    private Long id;
 
-    @Column(name = "NAME")
+    @Column(name = "USERNAME")
     private String userName;
 
-    private Integer age;
+    @Column(name = "TEAM_ID")
+    private Long teamId;
 
-    @Enumerated(EnumType.STRING)
-    private RoleType roleType;
 
-    @Temporal(TemporalType.TIMESTAMP)
-    private Date createDate;
-
-    @Temporal(TemporalType.TIMESTAMP)
-    private Date lastModifiedDate;
-
-    @Lob
-    private String description;
-
-    public String getId() {
-        return id;
-    }
 
     public String getUserName() {
         return userName;
     }
 
-    public Integer getAge() {
-        return age;
+    public void setUserName(String userName) {
+        this.userName = userName;
     }
 
-    public RoleType getRoleType() {
-        return roleType;
+    public Long getTeamId() {
+        return teamId;
     }
 
-    public Date getCreateDate() {
-        return createDate;
-    }
-
-    public Date getLastModifiedDate() {
-        return lastModifiedDate;
-    }
-
-    public String getDescription() {
-        return description;
+    public void setTeamId(Long teamId) {
+        this.teamId = teamId;
     }
 }
