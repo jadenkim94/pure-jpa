@@ -1,5 +1,8 @@
 package ch4.entity;
 
+import ch4.entity.domain.Order;
+import ch4.entity.domain.OrderItem;
+
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.EntityTransaction;
@@ -12,28 +15,10 @@ public class Main {
         EntityTransaction tx = em.getTransaction();
 
         tx.begin();
+
         try {
-            Team team = new Team();
-            team.setName("TeamA");
-            em.persist(team);
-
-            Team teamB = new Team();
-            team.setName("TeamB");
-            em.persist(teamB);
-
-            Member member = new Member();
-            member.setUserName("member1");
-            member.setTeam(team);
-            em.persist(member);
-
-            em.flush();
-            em.clear();
-
-            Member findMember = em.find(Member.class, member.getId());
-            Team findTeam = findMember.getTeam();
-            System.out.println(findTeam);
-
-            findMember.setTeam(teamB);
+            Order order = new Order();
+            order.addOrderItem(new OrderItem());
 
             tx.commit();
         } catch (Exception e) {
@@ -42,5 +27,6 @@ public class Main {
             em.close();
         }
         emf.close();
+
     }
 }
