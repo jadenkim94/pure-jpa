@@ -1,9 +1,6 @@
 package ch4.entity;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.Id;
+import javax.persistence.*;
 
 @Entity
 public class Member {
@@ -15,9 +12,8 @@ public class Member {
     @Column(name = "USERNAME")
     private String userName;
 
-    @Column(name = "TEAM_ID")
-    private Long teamId;
-
+    @ManyToOne(fetch = FetchType.LAZY)
+    private Team team;
 
 
     public String getUserName() {
@@ -28,11 +24,19 @@ public class Member {
         this.userName = userName;
     }
 
-    public Long getTeamId() {
-        return teamId;
+    public Long getId() {
+        return id;
     }
 
-    public void setTeamId(Long teamId) {
-        this.teamId = teamId;
+    public void setId(Long id) {
+        this.id = id;
+    }
+
+    public Team getTeam() {
+        return team;
+    }
+
+    public void setTeam(Team team) {
+        this.team = team;
     }
 }

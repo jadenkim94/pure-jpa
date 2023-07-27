@@ -17,10 +17,23 @@ public class Main {
             team.setName("TeamA");
             em.persist(team);
 
+            Team teamB = new Team();
+            team.setName("TeamB");
+            em.persist(teamB);
+
             Member member = new Member();
             member.setUserName("member1");
-            member.setTeamId(team.getId());
+            member.setTeam(team);
             em.persist(member);
+
+            em.flush();
+            em.clear();
+
+            Member findMember = em.find(Member.class, member.getId());
+            Team findTeam = findMember.getTeam();
+            System.out.println(findTeam);
+
+            findMember.setTeam(teamB);
 
             tx.commit();
         } catch (Exception e) {
